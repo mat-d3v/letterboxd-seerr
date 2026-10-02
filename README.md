@@ -5,11 +5,11 @@
 Sister project of [imdb-seerr](https://github.com/mat-d3v/imdb-seerr), for IMDb (movies and TV shows).
 
 <p align="center">
-  <a href="assets/letterboxd-seerr-presentation.mp4"><img src="assets/demo.gif" width="540" alt="Demo: on a Letterboxd film page, the cursor clicks the orange + Seerr button next to the IMDB and TMDB links. It shows Adding..., turns green (✓ Seerr), and a notification confirms: Added to Seerr, Neon Harbor."></a>
+  <a href="https://cdn.jsdelivr.net/gh/mat-d3v/letterboxd-seerr@main/assets/letterboxd-seerr-presentation.mp4"><img src="assets/demo.gif" width="540" alt="Demo: on a Letterboxd film page, the cursor clicks the orange + Seerr button next to the IMDB and TMDB links. It shows Adding..., turns green (✓ Seerr), and a notification confirms: Added to Seerr, Neon Harbor."></a>
 </p>
 
 <p align="center">
-  <a href="assets/letterboxd-seerr-presentation.mp4"><b>▶️ Watch the presentation video</b></a> (2:10, English, with captions)<br>
+  <a href="https://cdn.jsdelivr.net/gh/mat-d3v/letterboxd-seerr@main/assets/letterboxd-seerr-presentation.mp4"><b>▶️ Watch the presentation video</b></a> (2:10, English, with captions)<br>
   <sub><a href="assets/video-transcript.md">Descriptive transcript</a></sub>
 </p>
 
