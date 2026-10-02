@@ -2,7 +2,13 @@
 
 [🇫🇷 Français](README.fr.md) | [🇬🇧 English](README.md)
 
-*Captures d'écran à venir.*
+Projet frère de [imdb-seerr](https://github.com/mat-d3v/imdb-seerr), pour IMDb (films et séries).
+
+<p align="center">
+  <img src="assets/demo.gif" width="540" alt="Démo : sur une page film Letterboxd, le curseur clique sur le bouton orange + Seerr à côté des liens IMDB et TMDB. Le bouton affiche Adding..., passe au vert (✓ Seerr) et une notification confirme : Added to Seerr, Neon Harbor.">
+</p>
+
+🎬 **[Vidéo de présentation](assets/letterboxd-seerr-presentation.mp4)** (2:10, en anglais, sous-titrée) · [Transcription descriptive](assets/video-transcript.md) (en anglais)
 
 ## Langues supportées
 
