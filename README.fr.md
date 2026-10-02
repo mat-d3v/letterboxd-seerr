@@ -2,7 +2,9 @@
 
 [🇫🇷 Français](README.fr.md) | [🇬🇧 English](README.md)
 
-Projet frère de [imdb-seerr](https://github.com/mat-d3v/imdb-seerr), pour IMDb (films et séries).
+Ajoute un bouton **+ Seerr** sur les pages film Letterboxd pour demander des films en un clic à votre serveur [Seerr](https://seerr.dev), le gestionnaire de demandes pour Plex, Jellyfin et Emby (successeur d'Overseerr et de Jellyseerr).
+
+Projet frère : [imdb-seerr](https://github.com/mat-d3v/imdb-seerr) fait la même chose sur IMDb (films et séries).
 
 <p align="center">
   <a href="https://cdn.jsdelivr.net/gh/mat-d3v/letterboxd-seerr@main/assets/letterboxd-seerr-presentation.mp4"><img src="assets/demo.gif" width="540" alt="Démo : sur une page film Letterboxd, le curseur clique sur le bouton orange + Seerr à côté des liens IMDB et TMDB. Le bouton affiche Adding..., passe au vert (✓ Seerr) et une notification confirme : Added to Seerr, Neon Harbor."></a>
@@ -11,6 +13,11 @@ Projet frère de [imdb-seerr](https://github.com/mat-d3v/imdb-seerr), pour IMDb 
 <p align="center">
   <a href="https://cdn.jsdelivr.net/gh/mat-d3v/letterboxd-seerr@main/assets/letterboxd-seerr-presentation.mp4"><b>▶️ Voir la vidéo de présentation</b></a> (2:10, en anglais, sous-titrée)<br>
   <sub><a href="assets/video-transcript.md">Transcription descriptive</a> (en anglais)</sub>
+</p>
+
+<p align="center">
+  <a href="https://raw.githubusercontent.com/mat-d3v/letterboxd-seerr/main/letterboxd-seerr.user.js"><img src="https://img.shields.io/badge/Installer-userscript-f97316?style=for-the-badge" alt="Installer le script"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue?style=for-the-badge" alt="Licence MIT"></a>
 </p>
 
 ## Langues supportées
@@ -38,6 +45,10 @@ Votre instance Seerr doit être accessible depuis votre navigateur, que ce soit 
 
 > **Note :** `GM_xmlhttpRequest` (utilisé par Tampermonkey) contourne les restrictions mixed content du navigateur, donc HTTP fonctionne parfaitement. Si vous utilisez une extension basée sur `fetch`, HTTPS sera nécessaire.
 
+## Vie privée
+
+L'URL de votre Seerr et votre clé API sont enregistrées uniquement dans le stockage de votre gestionnaire de scripts, sur votre appareil. Le script ne communique qu'avec votre propre serveur Seerr : aucun serveur tiers, aucune statistique.
+
 ## Installation
 
 1. Installez un gestionnaire de userscripts :
@@ -48,6 +59,8 @@ Votre instance Seerr doit être accessible depuis votre navigateur, que ce soit 
 2. Cliquez [ici](https://raw.githubusercontent.com/mat-d3v/letterboxd-seerr/main/letterboxd-seerr.user.js) pour installer le script
 
 3. Ouvrez n'importe quelle page film Letterboxd et cliquez sur le bouton `+ Seerr` : le script vous demande l'URL de votre Seerr (ex : http://192.168.1.x:5055) et votre clé API (Seerr, Paramètres, Général, Clé API) à la première utilisation. C'est tout.
+
+   La première fois, Tampermonkey demande l'autorisation de contacter votre serveur Seerr (requête « cross-origin ») : choisissez **Always allow domain** (toujours autoriser ce domaine), sinon le script ne pourra pas joindre Seerr.
 
 Pour modifier la configuration plus tard : entrée « Configurer Seerr » dans le menu Tampermonkey, ou Maj+clic sur le bouton.
 
@@ -67,6 +80,12 @@ Si votre instance Seerr a des tags configurés sur sa connexion Radarr, une peti
 
 Le script fonctionne dans Safari sur iPhone et iPad avec l'app [Userscripts](https://apps.apple.com/app/userscripts/id1463298887) (gratuite). Il suffit que votre instance Seerr soit joignable depuis l'appareil, par exemple via Tailscale. La configuration se fait au premier appui, comme sur ordinateur.
 
+## Dépannage
+
+- **Le bouton n'apparaît pas** : il n'apparaît que sur les pages film (`letterboxd.com/film/...`). Vérifiez que le script est activé dans votre gestionnaire de scripts et rechargez la page.
+- **« ❌ Erreur » puis la fenêtre de configuration (code 401 ou 403)** : la clé API est incorrecte ou a été régénérée dans Seerr. Saisissez-la à nouveau.
+- **« ❌ Seerr inaccessible »** : l'URL est incorrecte ou Seerr n'est pas joignable depuis cet appareil (hors de chez vous, vérifiez votre VPN). Ouvrez l'URL dans le navigateur pour tester. Si vous avez refusé la demande d'autorisation de Tampermonkey, autorisez le domaine dans les paramètres du script.
+
 ## Licence
 
-MIT
+[MIT](LICENSE)
