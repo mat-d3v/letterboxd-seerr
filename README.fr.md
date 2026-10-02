@@ -5,10 +5,13 @@
 Projet frère de [imdb-seerr](https://github.com/mat-d3v/imdb-seerr), pour IMDb (films et séries).
 
 <p align="center">
-  <img src="assets/demo.gif" width="540" alt="Démo : sur une page film Letterboxd, le curseur clique sur le bouton orange + Seerr à côté des liens IMDB et TMDB. Le bouton affiche Adding..., passe au vert (✓ Seerr) et une notification confirme : Added to Seerr, Neon Harbor.">
+  <a href="assets/letterboxd-seerr-presentation.mp4"><img src="assets/demo.gif" width="540" alt="Démo : sur une page film Letterboxd, le curseur clique sur le bouton orange + Seerr à côté des liens IMDB et TMDB. Le bouton affiche Adding..., passe au vert (✓ Seerr) et une notification confirme : Added to Seerr, Neon Harbor."></a>
 </p>
 
-🎬 **[Vidéo de présentation](assets/letterboxd-seerr-presentation.mp4)** (2:10, en anglais, sous-titrée) · [Transcription descriptive](assets/video-transcript.md) (en anglais)
+<p align="center">
+  <a href="assets/letterboxd-seerr-presentation.mp4"><b>▶️ Voir la vidéo de présentation</b></a> (2:10, en anglais, sous-titrée)<br>
+  <sub><a href="assets/video-transcript.md">Transcription descriptive</a> (en anglais)</sub>
+</p>
 
 ## Langues supportées
 
