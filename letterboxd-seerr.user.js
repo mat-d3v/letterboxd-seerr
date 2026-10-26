@@ -2,7 +2,7 @@
 // @name         Letterboxd to Seerr
 // @name:fr      Letterboxd vers Seerr
 // @namespace    http://tampermonkey.net/
-// @version      2.2.0
+// @version      2.2.1
 // @description  Add a button to request movies directly on Seerr from Letterboxd, with optional quality profile and per-request tag selection
 // @description:fr  Ajoute un bouton pour demander des films sur Seerr directement depuis Letterboxd, avec profil qualité et choix de tag par demande
 // @description:de  Fügt einen Button hinzu, um Filme direkt von Letterboxd auf Seerr anzufragen, mit Qualitätsprofil und Tag-Auswahl pro Anfrage
@@ -232,6 +232,8 @@ async function promptConfig() {
   const key = prompt(MSG.promptKey, config.key);
   if (key === null) return false;
   config.url = url.trim().replace(/\/+$/, '');
+  // Sans schéma (« 192.168.1.20:5055 »), toutes les requêtes échoueraient
+  if (config.url && !/^https?:\/\//i.test(config.url)) config.url = 'http://' + config.url;
   config.key = key.trim();
   await storeSet('seerr_url', config.url);
   await storeSet('seerr_key', config.key);
@@ -250,6 +252,9 @@ function fetchServiceOptions(onDone) {
     onload: (res) => {
       let list = [];
       try { list = JSON.parse(res.responseText); } catch (e) { }
+      // Une erreur Seerr renvoie un objet : sans ce garde-fou, list.find
+      // lèverait une exception et le bouton resterait bloqué sur « Adding... »
+      if (!Array.isArray(list)) list = [];
       const server = list.find(s => s.isDefault) || list[0];
       if (!server) return onDone(null);
       gmRequest({
@@ -259,7 +264,7 @@ function fetchServiceOptions(onDone) {
         headers: { 'Accept': 'application/json', 'X-Api-Key': config.key },
         onload: (res2) => {
           let detail = {};
-          try { detail = JSON.parse(res2.responseText); } catch (e) { }
+          try { detail = JSON.parse(res2.responseText) || {}; } catch (e) { }
           onDone({
             serverId: server.id,
             profiles: detail.profiles || [],
@@ -493,12 +498,15 @@ function shakeBtn(btn) {
   setTimeout(() => { btn.style.transform = ''; }, shake.length * 60);
 }
 
-// mediaInfo.status Seerr : 4 = partiellement dispo, 5 = disponible
+// mediaInfo.status Seerr : 4 = partiellement dispo, 5 = disponible,
+// 6 = blocklisté, 7 = supprimé (redemandable). Statut de demande :
+// 3 = refusée, 5 = terminée ; comme Seerr, ces deux-là n'empêchent pas
+// une nouvelle demande (ex. film supprimé de la bibliothèque après visionnage).
 function mediaState(data) {
   const status = data.mediaInfo?.status || 0;
-  if (status >= 4) return 'available';
+  if (status === 4 || status === 5) return 'available';
   const requests = data.mediaInfo?.requests || [];
-  if (requests.some(r => !r.is4k && r.status !== 3)) return 'requested';
+  if (requests.some(r => !r.is4k && r.status !== 3 && r.status !== 5)) return 'requested';
   return 'idle';
 }
 
